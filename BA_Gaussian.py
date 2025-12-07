@@ -1,10 +1,7 @@
-# Updated code without Jeffery prior
-# (Original structure preserved, Jeffery prior sampling and MI removed)
-
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import simpson
-# ---------------------- Model Parameters ----------------------
+# Model Parameters 
 num_inputs = 1000
 num_outputs = 1000
 num_samples = 5000
@@ -14,7 +11,7 @@ c_vals = np.logspace(-1, 1, num_inputs)
 delta_c = np.gradient(c_vals)
 
 # Output grid
-g_vals = np.linspace(-0.02, 1.2, num_outputs)
+g_vals = np.linspace(-0.03, 1.2, num_outputs)
 
 b1 = 25e-4
 b2 = 0.5
@@ -102,15 +99,15 @@ plt.grid(True)
 plt.tight_layout()
 plt.show()
 
-# ---------------------- Compute P(g) ----------------------
-p_c1 = p_opt
-p_c1 /= simpson(p_c1, c_vals)
+#Compute P(g) 
+p_c = p_opt
+p_c /= simpson(p_c1, c_vals)
 
-P_g1 = Q @ p_c1
-P_g1 /= simpson(P_g1, g_vals)
+P_g = Q @ p_c
+P_g /= simpson(P_g, g_vals)
 
 plt.figure(figsize=(8, 5))
-plt.plot(g_vals, P_g1, label=r'BA', color='red')
+plt.plot(g_vals, P_g, label=r'BA', color='red')
 plt.xlabel("Output Expression Level $g$")
 plt.ylabel("Probability Density $P(g)$")
 plt.title("Predicted Output Distribution $P(g)$")
